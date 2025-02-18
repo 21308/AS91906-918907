@@ -25,3 +25,4 @@ if __name__ == "__main__":
     root.title("Temperature Converter")
     Converter()
     root.mainloop()
+    print("sdfsdf")
