@@ -51,6 +51,22 @@ class Converter():
                  ["Help / Info", "#CC6600", "", 1, 0],
                  ["History / Export", "#004C99", "", 1, 1]
             ]
+            # List to hold buttons once they have been made
+            self.button_ref_list = []
+
+            for item in button_details_list:
+                 self.make_button = Button(self.button_frame,
+                                            text=item[0], bg=item[1],
+                                                    fg="#FFFFFF", font=("Arial", "12", "bold"),
+                                                    width=12, command=item[2])
+                 self.make_button.grid(row=item[3], column=item[4], padx=5, pady=5)
+
+                 self.button_ref_list.append(self.make_button)
+
+            # Retrieve 'history / export' button and disable it at the start
+            self.to_history_button = self.button_ref_list[3].config(state=DISABLED)
+
+            
    # main routine
 if __name__ == "__main__":
     root = Tk()
