@@ -1,5 +1,5 @@
 from tkinter import *
-# import all constants as c 
+import all_constants as c 
 
 
 class Converter():
@@ -37,9 +37,9 @@ class Converter():
             self.temp_entry.grid(row=2, padx=10, pady=10)
 
             error = "Please enter a number"
-            self.temp_error = Label(self.temp_frame, text=error,
+            self.answer_error = Label(self.temp_frame, text=error,
                                     fg="#9C0000")
-            self.temp_error.grid(row=3)
+            self.answer_error.grid(row=3)
 
             # Conversion, help and history / export buttons
             self.button_frame = Frame(self.temp_frame)
@@ -68,12 +68,42 @@ class Converter():
             # Retrieve 'history / export' button and disable it at the start
             self.to_history_button = self.button_ref_list[3].config(state=DISABLED)
 
-def check_temp(self, min_temp):
-     print("Min Temp: ", min_temp)
+        def check_temp(self, min_temp):
+          print("Min Temp: ", min_temp)
+
+           # Retrieve temperature to be converted
+          to_convert = self.temp_entry.get()
+          print("to convert", to_convert)
+
+          try:
+               to_convert = float(to_convert)
+               if to_convert >= min_temp:
+                    error = ""
+                    self.convert(min_temp)
+               else:
+                    self.temp_error.config(text="Too Low!")
+
+          except ValueError:
+               self.temp_error.config(text="Please enter a number")
+
+          # Display the error if necessary
+          if error != "":
+               self.answer_error.config(text=error, fg="#9C0000")
+               self.temp_entry.config(bg="#F4CCCC")
+
+        def convert(self, min_temp):
+
+             if min_temp == c.ABS_ZERO_CELSIUS:
+                  self.answer_error.config(text="Converting to F")
+
+             else:
+                  self.answer_error.config(text="Converting to C") 
+
+
    # main routine
-     if __name__ == "__main__":
-          root = Tk()
-          root.title("Temperature Converter")
-          Converter()
-          root.mainloop()
+if __name__ == "__main__":
+     root = Tk()
+     root.title("Temperature Converter")
+     Converter()
+     root.mainloop()
     
