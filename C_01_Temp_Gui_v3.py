@@ -12,7 +12,6 @@ class Converter():
 
 
 
-
             self.temp_frame = Frame(padx=10, pady=10)
             self.temp_frame.grid()
 
@@ -38,7 +37,7 @@ class Converter():
 
             error = "Please enter a number"
             self.answer_error = Label(self.temp_frame, text=error,
-                                    fg="#9C0000")
+                                    fg="#0000FF", font=("Arial", "14", "bold"))
             self.answer_error.grid(row=3)
 
             # Conversion, help and history / export buttons
@@ -71,10 +70,17 @@ class Converter():
         def check_temp(self, min_temp):
           print("Min Temp: ", min_temp)
 
+
            # Retrieve temperature to be converted
           to_convert = self.temp_entry.get()
           print("to convert", to_convert)
 
+
+          # Reset label and entry box (if we had an error)
+          self.answer_error.config(fg="#004C99")
+          self.temp_entry.config(bg="#FFFFFF")
+
+          # checks that amount to be converted is a number above absolute zero
           try:
                to_convert = float(to_convert)
                if to_convert >= min_temp:
