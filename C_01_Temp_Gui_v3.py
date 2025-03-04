@@ -77,8 +77,12 @@ class Converter():
 
 
           # Reset label and entry box (if we had an error)
-          self.answer_error.config(fg="#004C99")
+          self.answer_error.config(fg="#004C99", font=("Arial", "13", "bold"))
           self.temp_entry.config(bg="#FFFFFF")
+
+
+          error = f"Enter a number more than / equal to {min_temp}"
+          has_errors = "no"
 
           # checks that amount to be converted is a number above absolute zero
           try:
@@ -87,23 +91,23 @@ class Converter():
                     error = ""
                     self.convert(min_temp)
                else:
-                    self.temp_error.config(text="Too Low!")
+                    self.answer_error.config(text="Too Low!")
 
           except ValueError:
-               self.temp_error.config(text="Please enter a number")
+               self.answer_error.config(text="Please enter a number")
 
           # Display the error if necessary
           if error != "":
                self.answer_error.config(text=error, fg="#9C0000")
                self.temp_entry.config(bg="#F4CCCC")
-
+               self.temp_entry.delete(0, END)
         def convert(self, min_temp):
 
              if min_temp == c.ABS_ZERO_CELSIUS:
-                  self.answer_error.config(text="Converting to F")
+                  self.answer_error.config(text=f"Converting {to_convert}℃ to ℉")
 
              else:
-                  self.answer_error.config(text="Converting to C") 
+                  self.answer_error.config(text=f"Converting {to_convert} ℉ to ℃")
 
 
    # main routine
